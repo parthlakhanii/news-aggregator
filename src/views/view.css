@@ -1,0 +1,63 @@
+.Card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Card:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cardDiv {
+    display: inline !important;
+}
+
+.news-container {
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.newsDiv {
+    box-shadow: 0 1px 3px #acbcda, 0 1px 2px #a7b7d4;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin: 20px 0px;
+    cursor: pointer;
+    color: rgb(66, 70, 87);
+    background-color: #e7f0fb;
+  }
+  
+  .newsDiv:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+  
+  .newsDiv-title {
+    color: rgb(66, 70, 87);
+    font-weight: 600;
+    font-family: "Crimson Text", serif;
+  }
+  
+  .newsDiv-title,
+  .newsDiv-description {
+    padding: 10px;
+  }
+  
+  .newsDiv-description {
+    line-height: 25px;
+    font-family: "Work Sans", sans-serif;
+  }
+  
+  .newsDiv img {
+    width: 100%;
+  }
+
+  .gridList {
+    margin: 5px;
+  }
+
+  .cardMargin {
+    margin: 5px;
+  }
