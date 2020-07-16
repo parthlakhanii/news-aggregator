@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Grid } from "@material-ui/core";
@@ -52,42 +53,45 @@ export default function Cards(data) {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    
+
     console.log(data)
 
     return (
         <Card className={classes.root}>
-            <CardHeader
-                avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        R
-            </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
-                title= {data.title}
-                subheader="September 14, 2016"
-            />
+
             <CardMedia
                 className={classes.media}
                 image={data.image}
-                title="Paella dish"
+                title={data.title}
             />
-            <CardContent>
+            <CardHeader
+                avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                        PKMKB
+            </Avatar>
+                }
+                // action={
+                //     <IconButton aria-label="settings">
+                //         <MoreVertIcon />
+                //     </IconButton>
+                // }
+                title={data.title}
+                subheader={data.publishedDate}
+            />
+            {/* <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {data.title} 
-                    {/* description */}
-          </Typography>
-            </CardContent>
+                    {data.description ? data.description : data.content}
+                </Typography>
+            </CardContent> */}
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon />
+                </IconButton>
+                <IconButton href={data.url} target="_blank">
+                    <OpenInNewIcon />
                 </IconButton>
                 <IconButton
                     className={clsx(classes.expand, {
@@ -102,7 +106,7 @@ export default function Cards(data) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    {data.content}
+                    {data.description ? data.description : data.content}
                 </CardContent>
             </Collapse>
         </Card>

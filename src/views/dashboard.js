@@ -1,7 +1,8 @@
 import React from 'react';
 import Cards from "./card"
-import GridList from "@material-ui/core/GridList";
+import Grid from "@material-ui/core/Grid";
 import "./view.css"
+import Container from '@material-ui/core/Container';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -26,20 +27,22 @@ class Dashboard extends React.Component {
     render() {
         var { newsData } = this.state;
         return (
-            <div className="news-container" >
-                <GridList cols={3} className="gridList">
+            <Container fixed>
+
+                <Grid justify="center" direction="row" container alignItems="center">
                     {newsData.map((item, index) => (
                         <Cards
                             key={index}
                             image={item.imageUrl}
                             title={item.title}
-                            description={item.content}
+                            content={item.content}
                             url={item.url}
                             publishedDate={item.publishedDate}
+                            description={item.description}
                         />
                     ))}
-                </GridList>
-            </div>
+                </Grid>
+            </Container>
         );
     }
 }

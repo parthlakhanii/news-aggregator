@@ -61,3 +61,11 @@
   .cardMargin {
     margin: 5px;
   }
+
+  .MuiCardHeader-root {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    min-height: 131.99px;
+    max-height: 131.99px;
+}
