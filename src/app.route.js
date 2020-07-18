@@ -1,32 +1,20 @@
-// import React, { Component } from 'react';
-// import { Router, Route } from 'react-router';
-// import DashboardComponent from './views/dashboard'
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Login from './views/login';
+import Dashboard from './views/dashboard';
+import Registration from './views/registration';
 
-// var Routes = [
-//     {
-//         path: '/',
-//         pathTo: '/dashboard',
-//         name: 'Dashboard',
-//         redirect: true
-//     },
-//     {
-//         path: '/dashboard',
-//         name: 'Dashboard',
-//         component: DashboardComponent
-//     }
-// ]
-
-// class AppRoute extends Component {
-//     render() {
-//         Routes.map((prop, key) => {
-//             return (
-//                 <Route path={prop.path}
-//                     component={prop.component}
-//                     key={key}>
-//                 </Route>
-//             );
-//         })
-//     }
-// }
-
-// export default AppRoute;
+export const Routes = () => {
+  return (
+    <div>
+      <Switch>
+        <Route exact path="/Login" component={Login} />
+        <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/">
+          <Redirect to="/Login" />
+        </Route>
+        <Route exact path="/Registration" component={Registration} />
+      </Switch>
+    </div>
+  );
+};

@@ -12,23 +12,21 @@ class Dashboard extends React.Component {
         };
     }
     componentDidMount() {
-        let url = "http://localhost:3001/api/v1/get/newsData";
+        let url = "http://localhost:3001/api/v1/get/newsData?country=in&catagory=sports";
         fetch(url)
             .then(res => res.json())
             .then(json => {
-                console.log(json)
+                console.log(json.data)
                 // sessionStorage.setItem('newsData', json)
                 this.setState({
-                    newsData: json
+                    newsData: json.data
                 })
             })
-
     }
     render() {
         var { newsData } = this.state;
         return (
             <Container fixed>
-
                 <Grid justify="center" direction="row" container alignItems="center">
                     {newsData.map((item, index) => (
                         <Cards

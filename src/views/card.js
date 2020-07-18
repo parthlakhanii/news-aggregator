@@ -4,150 +4,159 @@ import CardDeck from "react-bootstrap/CardDeck"
 import Button from "react-bootstrap/Button"
 import "./view.css"
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Grid } from "@material-ui/core";
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
     root: {
         maxWidth: 345,
-        margin: '5px',
+        margin: '7px',
+        maxHeight: 316.88,
+        minHeight: 316.88
+    },
+    root2: {
+        maxWidth: 650,
+        margin: '7px',
+        maxHeight: 650
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: 200,
     },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    avatar: {
-        backgroundColor: red[500],
-    },
-}));
+});
 
 export default function Cards(data) {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const handleClickOpen = () => {
+        setOpen(true);
     };
 
-    console.log(data)
-
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-        <Card className={classes.root}>
+        <>
+            <Card className={classes.root}>
+                <CardActionArea href={data.url} target="_blank">
+                    <CardMedia
+                        className={classes.media}
+                        image={data.image}
+                        title={data.title}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="body2" component="p">
+                            {data.title}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {data.publishedDate}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                {/* <CardActions>
+                <Button size="small" color="primary">
+                    Share
+          </Button>
+                <Button size="small" color="primary">
+                    Learn More
+          </Button>
+            </CardActions> */}
+            </Card>
+            <Dialog
+                fullScreen={fullScreen}
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="responsive-dialog-title"
+            >
+                <Card className={classes.root2}>
+                    <CardActionArea>
+                        <CardMedia
+                            className={classes.media}
+                            image={data.image}
+                            title={data.title}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="body2" component="p">
+                                {data.title}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {data.publishedDate}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
 
-            <CardMedia
-                className={classes.media}
-                image={data.image}
-                title={data.title}
-            />
-            <CardHeader
-                avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        PKMKB
-            </Avatar>
-                }
-                // action={
-                //     <IconButton aria-label="settings">
-                //         <MoreVertIcon />
-                //     </IconButton>
-                // }
-                title={data.title}
-                subheader={data.publishedDate}
-            />
-            {/* <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    {data.description ? data.description : data.content}
-                </Typography>
-            </CardContent> */}
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
-                <IconButton href={data.url} target="_blank">
-                    <OpenInNewIcon />
-                </IconButton>
-                <IconButton
-                    className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </IconButton>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                    {data.description ? data.description : data.content}
-                </CardContent>
-            </Collapse>
-        </Card>
-
+                {/* <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Let Google help apps determine location. This means sending anonymous location data to
+                        Google, even when no apps are running.
+          </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose} color="primary">
+                        Disagree
+          </Button>
+                    <Button onClick={handleClose} color="primary" autoFocus>
+                        Agree
+          </Button>
+                </DialogActions> */}
+            </Dialog>
+        </>
     );
 }
 
-// class Cards extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             image: this.props.image,
-//             title: this.props.title,
-//             description: this.props.description,
-//             url: this.props.url,
-//             publishedDate: this.props.publishedDate
-//         }
-//     }
+// export function ResponsiveDialog() {
+//     const [open, setOpen] = React.useState(false);
+//     const theme = useTheme();
+//     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+//     const handleClickOpen = () => {
+//       setOpen(true);
+//     };
 
+//     const handleClose = () => {
+//       setOpen(false);
+//     };
 
-// render() {
 //     return (
-//         <div className="newsDiv">
-//             <a className="Card" target="_blank" href={this.state.url} >
-//                 <Card style={{ width: '18rem' }}>
-//                     <Card.Img variant="top" src={this.state.image} />
-//                     <Card.Body>
-//                         <Card.Title>{this.state.title}</Card.Title>
-//                         <Card.Text>{this.state.description}</Card.Text>
-//                         {/* <Button variant="primary">Go somewhere</Button> */}
-//                     </Card.Body>
-//                     <Card.Footer>
-//                         <small className="text-muted">Published Date: {this.state.publishedDate}</small>
-//                     </Card.Footer>
-//                 </Card>
-//             </a>
-//         </div>
+//       <div>
+//         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+//           Open responsive dialog
+//         </Button>
+//         <Dialog
+//           fullScreen={fullScreen}
+//           open={open}
+//           onClose={handleClose}
+//           aria-labelledby="responsive-dialog-title"
+//         >
+//           <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
+//           <DialogContent>
+//             <DialogContentText>
+//               Let Google help apps determine location. This means sending anonymous location data to
+//               Google, even when no apps are running.
+//             </DialogContentText>
+//           </DialogContent>
+//           <DialogActions>
+//             <Button autoFocus onClick={handleClose} color="primary">
+//               Disagree
+//             </Button>
+//             <Button onClick={handleClose} color="primary" autoFocus>
+//               Agree
+//             </Button>
+//           </DialogActions>
+//         </Dialog>
+//       </div>
 //     );
-
-// }
-// }
-
-// export default Cards;
+//   }
