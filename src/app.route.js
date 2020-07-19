@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Login from './views/login';
-import Dashboard from './views/dashboard';
-import Registration from './views/registration';
+import Login from './components/login';
+import Dashboard from './components/dashboard';
+import Registration from './components/registration';
+import SideBar from './views/sideBar'
 
 export const Routes = () => {
   return (
     <div>
+      {/* <SideBar /> */}
       <Switch>
         <Route exact path="/Login" component={Login} />
         <Route exact path="/Dashboard" component={Dashboard} />

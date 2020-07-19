@@ -1,3 +1,9 @@
+a {
+  text-decoration: none !important;
+}
+a:hover {
+  color:black !important;
+}
 .Card {
     text-decoration: none;
     color: inherit;
@@ -54,8 +60,8 @@
     width: 100%;
   }
 
-  .gridList {
-    margin: 5px;
+  .Grid {
+    padding-left: 73px;
   }
 
   .cardMargin {
@@ -68,4 +74,9 @@
     align-items: center;
     min-height: 131.99px;
     max-height: 131.99px;
+}
+
+.MuiOutlinedInput-notchedOutline, .MuiOutlinedInput-input, .MuiInputLabel-outlined, .makeStyles-paper-1, .MuiIconButton-label{
+  border-color: #fff !important;
+  color: #fff !important;
 }

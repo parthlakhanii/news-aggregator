@@ -10,10 +10,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -22,7 +18,9 @@ const useStyles = makeStyles({
         maxWidth: 345,
         margin: '7px',
         maxHeight: 316.88,
-        minHeight: 316.88
+        minHeight: 316.88,
+        backgroundColor: '#404040',
+        color: 'white'
     },
     root2: {
         maxWidth: 650,

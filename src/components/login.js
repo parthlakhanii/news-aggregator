@@ -8,34 +8,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import AppRoute from '../app.route';
-import {NavLink} from 'react-router-dom';
-import {Routes} from '../app.route'
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
-import Dashboard from './dashboard';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-      </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -59,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
     const classes = useStyles();
-    const preventDefault = (event) => event.preventDefault();
 
     return (
         <Container component="main" maxWidth="xs">
