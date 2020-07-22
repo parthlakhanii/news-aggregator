@@ -14,7 +14,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Dashboard from '../components/dashboard';
 
 const drawerWidth = 240;
 
@@ -102,7 +101,6 @@ export default function SideBar(props) {
 
     const setCategory = (category) => {
         console.log('setCategory')
-        category = category
         props.changeCategoryEvent(category)
     }
 

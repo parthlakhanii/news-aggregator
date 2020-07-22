@@ -1,7 +1,4 @@
 import React from "react";
-// import Card from "react-bootstrap/Card"
-import CardDeck from "react-bootstrap/CardDeck"
-import Button from "react-bootstrap/Button"
 import "./view.css"
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -37,9 +34,9 @@ export default function Cards(data) {
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
 
     const handleClose = () => {
         setOpen(false);

@@ -2,7 +2,6 @@ import React from 'react';
 import Cards from "../views/card"
 import Grid from "@material-ui/core/Grid";
 import "../views/view.css"
-import Container from '@material-ui/core/Container';
 import SideBar from '../views/sideBar'
 class Dashboard extends React.Component {
     constructor(props) {
@@ -14,7 +13,8 @@ class Dashboard extends React.Component {
     }
     componentDidMount() {
         console.log('componentDidMount')
-        let url = "http://localhost:3001/api/v1/get/newsData?country=in&catagory=sports";
+        // let url = "http://localhost:3001/api/v1/get/newsData?country=in&catagory=sports";
+        let url = "http://52.235.44.113:3001/api/v1/get/newsData?country=in&catagory=sports";
         fetch(url)
             .then(res => res.json())
             .then(json => {
@@ -28,7 +28,8 @@ class Dashboard extends React.Component {
 
     changeCategory=(category)=>{
         console.log('changeCategory')
-        let url = `http://localhost:3001/api/v1/get/newsData?country=in&catagory=${category}`;
+        // let url = `http://localhost:3001/api/v1/get/newsData?country=in&catagory=${category}`;
+        let url = `http://52.235.44.113:3001/api/v1/get/newsData?country=in&catagory=${category}`;
         fetch(url)
             .then(res => res.json())
             .then(json => {
