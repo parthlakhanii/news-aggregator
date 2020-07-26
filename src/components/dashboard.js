@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
     componentDidMount() {
         console.log('componentDidMount')
         // let url = "http://localhost:3001/api/v1/get/newsData?catagory=sports";
-        let url = "http://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=technology";
+        let url = "https://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=technology";
         fetch(url)
             .then(res => res.json())
             .then(json => {
@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
     changeCategory = (category) => {
         console.log('changeCategory')
         // let url = `http://localhost:3001/api/v1/get/newsData?catagory=${category}`;
-        let url = `http://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=${category}`;
+        let url = `https://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=${category}`;
         fetch(url)
             .then(res => res.json())
             .then(json => {
