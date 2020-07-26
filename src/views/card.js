@@ -9,6 +9,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Dialog from '@material-ui/core/Dialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import Moment from 'react-moment';
 
 const useStyles = makeStyles({
     root: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles({
     },
     media: {
         height: 200,
+    },
+    color: {
+        color: 'white !important'
     },
 });
 
@@ -55,7 +59,8 @@ export default function Cards(data) {
                             {data.title}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {data.publishedDate}
+                            {/* {data.publishedDate} */}
+                            <Moment fromNow>{data.publishedDate}</Moment>
                         </Typography>
                     </CardContent>
                 </CardActionArea>
@@ -85,7 +90,7 @@ export default function Cards(data) {
                             <Typography gutterBottom variant="body2" component="p">
                                 {data.title}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
+                            <Typography className={classes.color} variant="body2" component="p">
                                 {data.publishedDate}
                             </Typography>
                         </CardContent>

@@ -100,11 +100,9 @@ export default function SideBar(props) {
     };
 
     const setCategory = (category) => {
-        console.log('setCategory')
         props.changeCategoryEvent(category)
     }
 
-    window.x = true
     return (
         <>
             <div className={classes.root}>
@@ -129,7 +127,7 @@ export default function SideBar(props) {
                         </IconButton>
                         <Typography variant="h6" noWrap>
                             News Aggregator
-          </Typography>
+                        </Typography>
                     </Toolbar>
                 </AppBar>
                 <Drawer

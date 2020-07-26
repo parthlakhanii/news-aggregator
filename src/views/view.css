@@ -80,3 +80,7 @@ a:hover {
   border-color: #fff !important;
   color: #fff !important;
 }
+
+.MuiTypography-colorTextSecondary {
+  color: darkgray !important;
+}

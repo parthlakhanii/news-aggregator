@@ -13,8 +13,8 @@ class Dashboard extends React.Component {
     }
     componentDidMount() {
         console.log('componentDidMount')
-        // let url = "http://localhost:3001/api/v1/get/newsData?country=in&catagory=sports";
-        let url = "http://52.235.44.113:3001/api/v1/get/newsData?country=in&catagory=sports";
+        // let url = "http://localhost:3001/api/v1/get/newsData?catagory=sports";
+        let url = "http://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=technology";
         fetch(url)
             .then(res => res.json())
             .then(json => {
@@ -26,10 +26,10 @@ class Dashboard extends React.Component {
             })
     }
 
-    changeCategory=(category)=>{
+    changeCategory = (category) => {
         console.log('changeCategory')
-        // let url = `http://localhost:3001/api/v1/get/newsData?country=in&catagory=${category}`;
-        let url = `http://52.235.44.113:3001/api/v1/get/newsData?country=in&catagory=${category}`;
+        // let url = `http://localhost:3001/api/v1/get/newsData?catagory=${category}`;
+        let url = `http://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=${category}`;
         fetch(url)
             .then(res => res.json())
             .then(json => {
@@ -38,11 +38,24 @@ class Dashboard extends React.Component {
                 })
             })
     }
+
+    removeDuplicates = (newsData) => {
+        const titles = []
+        for (let data in newsData) {
+            if (!titles.includes(newsData[data].title)) {
+                titles.push(newsData[data].title)
+            } else {
+                delete newsData[data]
+            }
+        }
+    }
+
     render() {
         var { newsData } = this.state;
+        this.removeDuplicates(newsData)
         return (
             <>
-                <SideBar changeCategoryEvent={this.changeCategory.bind(this)}/>
+                <SideBar changeCategoryEvent={this.changeCategory.bind(this)} />
                 <Grid justify="center" direction="row" container alignItems="center" className="Grid">
                     {newsData.map((item, index) => (
                         <Cards
