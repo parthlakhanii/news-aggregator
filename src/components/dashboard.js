@@ -12,7 +12,8 @@ class Dashboard extends React.Component {
     };
   }
   componentDidMount() {
-    let url = "http://localhost:3001/api/v1/get/newsData";
+    console.log("API URL:", process.env.REACT_APP_API_URL);
+    let url = `${process.env.REACT_APP_API_URL}/api/v1/get/newsData`;
     // let url = "https://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=technology";
     fetch(url)
       .then((res) => res.json())
@@ -24,7 +25,7 @@ class Dashboard extends React.Component {
   }
 
   changeCategory = (category) => {
-    const getNewsUrl = `http://localhost:3001/api/v1/get/newsData?category=${category}`;
+    const getNewsUrl = `${process.env.REACT_APP_API_URL}/api/v1/get/newsData?category=${category}`;
     // let url = `https://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=${category}`;
     fetch(getNewsUrl)
       .then((res) => res.json())
@@ -50,7 +51,7 @@ class Dashboard extends React.Component {
   };
 
   addNewsData = (category) => {
-    const addNewsUrl = `http://localhost:3001/api/v1/wrapper/newsApiCall`;
+    const addNewsUrl = `${process.env.REACT_APP_API_URL}/api/v1/wrapper/newsApiCall`;
     const body = { country: "us", category: category };
     const options = {
       method: "POST",
@@ -92,7 +93,7 @@ class Dashboard extends React.Component {
       <>
         <SideBar changeCategoryEvent={this.changeCategory.bind(this)} />
         <Grid
-          justify="center"
+          justifyContent="center"
           direction="row"
           container
           alignItems="center"
