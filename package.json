@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
+    "gh-pages": "^6.3.0",
     "history": "^5.0.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "moment": "^2.27.0",
