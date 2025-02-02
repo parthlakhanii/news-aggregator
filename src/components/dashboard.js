@@ -1,26 +1,22 @@
-import React from 'react';
-import Cards from '../views/card';
-import Grid from '@material-ui/core/Grid';
-import '../views/view.css';
-import SideBar from '../views/sideBar';
-import { RepeatOneSharp } from '@material-ui/icons';
+import React from "react";
+import Cards from "../views/card";
+import Grid from "@material-ui/core/Grid";
+import "../views/view.css";
+import SideBar from "../views/sideBar";
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props.catagory);
     this.state = {
       newsData: [],
     };
   }
   componentDidMount() {
-    console.log('componentDidMount');
-    let url = 'http://localhost:3001/api/v1/get/newsData';
+    let url = "http://localhost:3001/api/v1/get/newsData";
     // let url = "https://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=technology";
     fetch(url)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data);
-        // sessionStorage.setItem('newsData', json)
         this.setState({
           newsData: json.data,
         });
@@ -28,31 +24,39 @@ class Dashboard extends React.Component {
   }
 
   changeCategory = (category) => {
-    console.log('changeCategory');
     const getNewsUrl = `http://localhost:3001/api/v1/get/newsData?category=${category}`;
     // let url = `https://newsaggregator.canadaeast.cloudapp.azure.com:3001/api/v1/get/newsData?country=in&catagory=${category}`;
     fetch(getNewsUrl)
       .then((res) => res.json())
       .then((json) => {
-        if (json.data.length === 0) {
-          console.log();
-          this.addNewsData(category);
+        if (json.data && json.data.length > 0) {
+          const currentDate = new Date();
+          const publishedDate = new Date(json.data[0].publishedDate);
+          const diffDays = Math.floor(
+            (currentDate - publishedDate) / (1000 * 60 * 60 * 24)
+          );
+          if (diffDays > 1) {
+            this.addNewsData(category);
+            return;
+          } else {
+            this.setState({
+              newsData: json.data,
+            });
+          }
         } else {
-          this.setState({
-            newsData: json.data,
-          });
+          this.addNewsData(category);
         }
       });
   };
 
   addNewsData = (category) => {
     const addNewsUrl = `http://localhost:3001/api/v1/wrapper/newsApiCall`;
-    const body = { country: 'us', category: category };
+    const body = { country: "us", category: category };
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(body),
     };
@@ -61,7 +65,7 @@ class Dashboard extends React.Component {
       .then((response) => response.json())
       .then((json) => {
         if (json.data === []) {
-          throw Error('No data available');
+          throw Error("No data available");
         } else {
           this.setState({
             newsData: json.data,
@@ -88,11 +92,11 @@ class Dashboard extends React.Component {
       <>
         <SideBar changeCategoryEvent={this.changeCategory.bind(this)} />
         <Grid
-          justify='center'
-          direction='row'
+          justify="center"
+          direction="row"
           container
-          alignItems='center'
-          className='Grid'
+          alignItems="center"
+          className="Grid"
         >
           {newsData.map((item, index) => (
             <Cards
@@ -101,7 +105,15 @@ class Dashboard extends React.Component {
               title={item.title}
               content={item.content}
               url={item.url}
-              publishedDate={item.publishedDate}
+              publishedDate={new Date(item.publishedDate).toLocaleDateString(
+                "en-US",
+                {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              )}
               description={item.description}
             />
           ))}
